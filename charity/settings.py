@@ -38,6 +38,7 @@ MODE=config("MODE", default="dev")
 
 INSTALLED_APPS = [
     'charityapp.apps.CharityappConfig',
+    'ngo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
