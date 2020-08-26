@@ -39,6 +39,7 @@ MODE=config("MODE", default="dev")
 INSTALLED_APPS = [
     'charityapp.apps.CharityappConfig',
     'crispy_forms',
+    'ngo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
