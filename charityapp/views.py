@@ -11,6 +11,9 @@ from .decorators import donor_required, ngo_required
 from django.views.generic import CreateView
 from .models import User, Donor, NGO
 
+
+
+
 # Create your views here.
 def index(request):
     return render(request, 'users/welcome.html')
