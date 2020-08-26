@@ -1,4 +1,6 @@
-venv/
+virtual/
 __pycache__/
 .env
+.idea/
 virtual/
+venv/

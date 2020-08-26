@@ -1,0 +1,6 @@
+Hello {{name}},
+
+Welcome to the Charity-Online, We help you keep track of your donations
+
+Regards,
+Charity-Online
