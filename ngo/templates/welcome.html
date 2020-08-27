@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <h4>Welcome</h4>
+        <div class="col-sm-12">
+            {% if user.is_authenticated and user.is_ngo %}
+            <a href="{% url 'request_donation' %}" class="btn btn-info">Request Donation</a href="{% url 'request_donation'%">
+            {% endif %}
+            {% if user.is_authenticated and user.is_donor %}
+                {% for donation in donations %}
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{donation.name}}</p>
+                            <p>{{donation.description}}</p>
+                            <p>{{donation.ngo}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+    </div>
+{% endblock %}
