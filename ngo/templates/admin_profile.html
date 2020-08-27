@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+    <div class="row">
+        <h4>Dasboard</h4>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h5 class="text-danger text-center">Donation Requests</h5>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">NGO</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for donation in donations %}
+                        <tr>
+                            <th scope="row">{{donation.id}}</th>
+                            <td>{{donation.name}}</td>
+                            <td>{{donation.description}}</td>
+                            <td>{{donation.ngo.name}}</td>
+                            <td>
+                                {% if donation.status == False %} 
+                                    <a href="{% url 'approve_request' donation.id %}" class="btn btn-danger">Not Approved</a> 
+                                {% else %} <button class="btn btn-success">Approved</button> 
+                                {% endif %}
+                            </td>
+                        </tr>
+                  {% endfor %}                  
+                </tbody>
+              </table>
+        </div>
+        
+    </div>
+{% endif %}
+
+{% endblock %}

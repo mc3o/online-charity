@@ -1,31 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 import datetime as dt
+from charityapp.models import NGO
 
 # from pyuploadcare.dj.models import ImageField
 # from tinymce.models import HTMLField
 
 
 # Create your models here.
-
-class NGO(models.Model):
-    id = models.AutoField
-    name = models.CharField(max_length=50,)
-    location = models.CharField(max_length=50,)
-    case = models.CharField(max_length=100,)
-    phone = models.CharField(max_length=20, blank=False,)
-    email = models.CharField(max_length=30,)
-    image = models.ImageField(blank=True,)
-
-    def create_ngo(self):
-        self.save()
-
-    def delete_ngo(self):
-        self.delete()
-
-    @classmethod
-    def search_by_name(cls, id_):
-        ngo = cls.objects.filter(name=id)
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -47,12 +29,13 @@ class Category(models.Model):
     def display_all_categories(cls):
         return cls.objects.all()
         
-class Donations(models.Model):
+class Donation(models.Model):
     name = models.CharField(max_length=40)
     description = models.TextField()
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
-    photo_image = models.ImageField(upload_to = 'photos/')
+    ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, null=True)
+    status = models.BooleanField(default=False)
 
     def save_donations(self):
         self.save()
