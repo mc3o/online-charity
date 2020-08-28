@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.db import models
 import datetime as dt
-from charityapp.models import NGO
+from charityapp.models import NGO, User, Donor
 
 # from pyuploadcare.dj.models import ImageField
 # from tinymce.models import HTMLField
@@ -37,6 +37,7 @@ class Donation(models.Model):
     ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, null=True)
     status = models.BooleanField(default=False)
 
+
     def save_donations(self):
         self.save()
 
@@ -55,5 +56,14 @@ class Donation(models.Model):
     @classmethod
     def display_all_donations(cls):
         return cls.objects.all()
+
+class MadeDonation(models.Model):
+    donor = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True)
+    donation = models.ForeignKey(Donation, on_delete=models.CASCADE)
+    amount = models.CharField(max_length=100)
+    ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.amount
 
 

@@ -10,6 +10,7 @@ from .emails import send_welcome_email
 from .decorators import donor_required, ngo_required
 from django.views.generic import CreateView
 from .models import User, Donor, NGO
+from ngo.models import MadeDonation
 
 
 
@@ -100,7 +101,7 @@ class NgoSignUpView(CreateView):
 def donor_profile(request):
     user = request.user
     donor_pr = Donor.objects.filter(pk=user).first()
-    print(donor_pr.image)
+    donations_made = MadeDonation.objects.filter(donor_id=donor_pr)
     if request.method == 'POST':
         pr_form = DonorUpdateForm(request.POST, request.FILES, instance=donor_pr)
         if pr_form.is_valid():
@@ -112,6 +113,7 @@ def donor_profile(request):
     content = {
         'donor': donor_pr,
         'profile_form': pr_form,
+        'donations': donations_made
     }
     return render(request, 'users/donor_profile.html', content)
 
@@ -119,7 +121,7 @@ def donor_profile(request):
 def ngo_profile(request):
     user = request.user
     ngo_pr = NGO.objects.filter(pk=user).first()
-    print(ngo_pr.image)
+    donations_received = MadeDonation.objects.filter(ngo_id=ngo_pr)
     if request.method == 'POST':
         pr_form = NgoUpdateForm(request.POST, request.FILES, instance=ngo_pr)
         if pr_form.is_valid():
@@ -131,5 +133,6 @@ def ngo_profile(request):
     content = {
         'ngo': ngo_pr,
         'profile_form': pr_form,
+        'donations': donations_received
     }
     return render(request, 'users/ngo_profile.html', content)
