@@ -102,6 +102,7 @@ def donor_profile(request):
     user = request.user
     donor_pr = Donor.objects.filter(pk=user).first()
     donations_made = MadeDonation.objects.filter(donor_id=donor_pr)
+    print(donations_made)
     if request.method == 'POST':
         pr_form = DonorUpdateForm(request.POST, request.FILES, instance=donor_pr)
         if pr_form.is_valid():
@@ -122,6 +123,7 @@ def ngo_profile(request):
     user = request.user
     ngo_pr = NGO.objects.filter(pk=user).first()
     donations_received = MadeDonation.objects.filter(ngo_id=ngo_pr)
+    print(donations_received)
     if request.method == 'POST':
         pr_form = NgoUpdateForm(request.POST, request.FILES, instance=ngo_pr)
         if pr_form.is_valid():
