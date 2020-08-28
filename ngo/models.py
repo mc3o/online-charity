@@ -2,6 +2,8 @@
 from django.db import models
 import datetime as dt
 from charityapp.models import NGO, User, Donor
+from django.urls import reverse
+
 
 # from pyuploadcare.dj.models import ImageField
 # from tinymce.models import HTMLField
@@ -56,6 +58,9 @@ class Donation(models.Model):
     @classmethod
     def display_all_donations(cls):
         return cls.objects.all()
+
+    def get_absolute_url(self):
+        return reverse('donation-detail', kwargs={'pk':self.pk}) 
 
 class MadeDonation(models.Model):
     donor = models.ForeignKey(Donor, on_delete=models.CASCADE, null=True)

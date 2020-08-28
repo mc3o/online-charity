@@ -6,6 +6,11 @@
                 <div class="card-body">
                     <p>{{object.name}}</p>
                     <p>{{object.description}}</p>
+                    <div class="card-footer">
+                        <a href="{% url 'update-donation' object.id %}" class="btn btn-outline-secondary">Update</a>
+                        <a href="{% url 'delete-donation' object.id %}" class="btn btn-outline-danger">Delete</a>
+
+                    </div>
                 </div>
             </div>
 
