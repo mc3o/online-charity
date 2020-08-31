@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <h4>Welcome</h4>
+        <div class="col-sm-12">
+            {% if user.is_authenticated and user.is_ngo%}
+            <a href="{% url 'request_donation' %}" class="btn btn-primary">Request Donation</a href="{% url 'request_donation'%">
+            <h6>Approved Donation Requests</h6>
+            {% for donation in app_donations %}
+                {% if user.username == donation.ngo.name %}
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            <p>{{donation.name}}</p>
+                            <p>{{donation.description}}</p>
+                            <p>{{donation.ngo.name}}</p>
+                            <p>{{donation.category.name}}</p>
+                            <a href="{% url 'donation-detail' donation.id %}" class="btn btn-success">View Details</a>
+
+
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <h6>Pending Donations</h6>
+            {% for donation in rej_donations %}
+                {% if user.username == donation.ngo.name %}
+                    <div class="card mt-1">
+                        <div class="card-body">
+                            <p>{{donation.name}}</p>
+                            <p>{{donation.description}}</p>
+                            <p>{{donation.ngo.name}}</p>
+                            <p>{{donation.category.name}}</p>
+                            <a href="{% url 'donation-detail' donation.id %}" class="btn btn-success">View Details</a>
+
+
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% endif %}
+            {% if user.is_authenticated and user.is_donor %}
+                {% for donation in app_donations %}
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{donation.name}}</p>
+                            <p>{{donation.description}}</p>
+                            <p>{{donation.ngo.name}}</p>
+                            <p>{{donation.category.name}}</p>
+                            <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+    </div>
+{% endblock %}

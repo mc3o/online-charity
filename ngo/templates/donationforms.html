@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <form  action="" method="POST">
+            {% csrf_token %}
+            
+            <h2 class="intro">Fill out this form if you want to donate to {{donation.ngo.name}}</h2>
+            {{ form|crispy}}
+            <button class="btn btn-success" type="submit">Donate</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
