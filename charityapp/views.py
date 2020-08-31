@@ -138,3 +138,19 @@ def ngo_profile(request):
         'donations': donations_received
     }
     return render(request, 'users/ngo_profile.html', content)
+
+
+@login_required
+def search_donations(request):
+    if 'search_donations' in request.GET :
+        name = request.GET.get("search_donations")
+        print(name)
+        message = f'name'
+        params = {
+            'results': name,
+            
+        }
+        return render(request, 'users/results.html', params)
+    else:
+        message = "You haven't searched for any donations"
+    return render(request, 'users/results.html', {'message': message})
