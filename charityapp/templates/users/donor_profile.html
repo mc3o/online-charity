@@ -6,10 +6,11 @@
 <div id="page">
     <div class="row content-section" >
     
+
         <div class="col-sm-12" id="kk">
             <div class="media" style="width: 61%; margin:1em auto;"> 
-                {% if ngo.image %}
-                    <img src="{{ngo.image.url}}" alt="{{user.username}}" class="rounded-circle img-responsive"  width="190" height="180">
+                {% if donor.image %}
+                    <img src="{{donor.image.url}}" alt="{{user.username}}" class="rounded-circle img-responsive"  width="190" height="180">
                     {%else%}
                     <img src="../media/user.svg" alt="{{user.username}}" class="account-img" width="20%" height="20%">
                 {% endif %}

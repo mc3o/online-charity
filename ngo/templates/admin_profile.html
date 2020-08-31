@@ -9,6 +9,12 @@
 
     </div>
     <div class="row">
+        <a href="{% url 'add-category' %}" class="btn btn-warning">Add Category</a>
+        <ul>
+            {% for category in categories %}
+            <li>{{category.name}}</li>
+            {% endfor %}
+        </ul>
         <div class="col-sm-12">
 
             <h5 class="text-center">Donation Requests</h5>
