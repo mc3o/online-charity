@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from .forms import DonationForm, RequestForm
+from .forms import DonationForm, RequestForm, CategoryForm
 from django.http import HttpResponseRedirect, JsonResponse
-from .models import Donation, MadeDonation
+from .models import Donation, MadeDonation, Category
 from django.contrib.auth.decorators import login_required
 from charityapp.decorators import ngo_required, donor_required
 from charityapp.models import NGO, Donor
@@ -10,6 +10,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -69,8 +70,10 @@ def donations_detail(request, id):
 @user_passes_test(lambda u: u.is_superuser)
 def admin_profile(request):
     donation_req = Donation.display_all_donations()
+    categories = Category.objects.all()
     context = {
         'donations': donation_req,
+        'categories': categories
     }
     return render(request, 'admin_profile.html', context)
 
@@ -122,6 +125,16 @@ def make_donation(request, id):
         }
         return render(request, 'donationforms.html', context)
    
-
-
+@user_passes_test(lambda u: u.is_superuser)
+def add_category(request):
+    
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(f'Category successfully added')
+            return redirect('admin_profile')
+    else:
+        form = CategoryForm()
+        return render(request, 'category_form.html', {"form": form})
     
