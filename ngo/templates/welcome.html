@@ -1,55 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <div class="row">
-        <h4>Welcome</h4>
+    <div id="welcome3">
+        <h1 class="text-center" id="welcome2">Welcome to Charity</h1>
+        <h3 class="text-center" id="welcome1">Any amount is welcome</h3>
+    </div>
+    <div class="row" id="welcome">
         <div class="col-sm-12">
             {% if user.is_authenticated and user.is_ngo%}
-            <a href="{% url 'request_donation' %}" class="btn btn-primary">Request Donation</a href="{% url 'request_donation'%">
-            <h6>Approved Donation Requests</h6>
+            
+            <b>Approved Donation Requests</b>
             {% for donation in app_donations %}
                 {% if user.username == donation.ngo.name %}
                     <div class="card mt-1">
+                        <div class="card-header text-center" id="welcome4">
+                            <h3>{{donation.name}}</h3>
+                        </div>
                         <div class="card-body">
-                            <p>{{donation.name}}</p>
-                            <p>{{donation.description}}</p>
-                            <p>{{donation.ngo.name}}</p>
-                            <p>{{donation.category.name}}</p>
+                            <h4>{{donation.description}}</h4>
+                            <p><b>Organisation:</b> {{donation.ngo.name}}</p>
+                            <p><b>Category:</b> {{donation.category.name}}</p>
                             <a href="{% url 'donation-detail' donation.id %}" class="btn btn-success">View Details</a>
 
 
                         </div>
-                    </div>
+                    </div><br>
+                    
                 {% endif %}
             {% endfor %}
-            <h6>Pending Donations</h6>
+            <a href="{% url 'request_donation' %}" class="btn btn-outline-primary btn-block">Request Donation</a href="{% url 'request_donation'%"><br><br>
+            <b>Pending Donations</b>
             {% for donation in rej_donations %}
                 {% if user.username == donation.ngo.name %}
                     <div class="card mt-1">
+                        <div class="card-header text-center" id="welcome4">
+                            <h3>{{donation.name}}</h3>
+                        </div>
                         <div class="card-body">
-                            <p>{{donation.name}}</p>
-                            <p>{{donation.description}}</p>
-                            <p>{{donation.ngo.name}}</p>
-                            <p>{{donation.category.name}}</p>
+                            <h3>{{donation.description}}</h3>
+                            <p><b>Organisation:</b> {{donation.ngo.name}}</p>
+                            <p><b>Category:</b> {{donation.category.name}}</p>
                             <a href="{% url 'donation-detail' donation.id %}" class="btn btn-success">View Details</a>
 
 
                         </div>
-                    </div>
+                    </div><br>
                 {% endif %}
             {% endfor %}
-
+            
             {% endif %}
             {% if user.is_authenticated and user.is_donor %}
                 {% for donation in app_donations %}
                     <div class="card">
+                        <div class="card-header text-center" id="welcome4">
+                            <h3>{{donation.name}}</h3>
+                        </div>
                         <div class="card-body">
-                            <p>{{donation.name}}</p>
-                            <p>{{donation.description}}</p>
-                            <p>{{donation.ngo.name}}</p>
-                            <p>{{donation.category.name}}</p>
+                            <h4>{{donation.description}}</h4>
+                            <p><b>Organisation:</b> {{donation.ngo.name}}</p>
+                            <p><b>Category:</b> {{donation.category.name}}</p>
                             <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
                         </div>
-                    </div>
+                    </div><br>
                 {% endfor %}
             {% endif %}
         </div>
