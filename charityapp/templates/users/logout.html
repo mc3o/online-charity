@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <div class="row">
-        <div class="col-sm-12">
+    <div class="row" id="logout">
+        <div class="col-sm-2">
+            <img src="../media/user-x.svg" width="90%" height="85%">
+        </div>
+        <div class="col-sm-7 shadow-lg" id="logout1">
             <h4>You have been logged out</h4>
             <div class="pt-3">
-                <small class="text-muted">Login again <a href="{% url 'login'%}" class="btn btn-success">Login again</a></small>
+                <a href="{% url 'login'%}" class="btn btn-success btn-sm">Login again</a>
             </div>
         </div>
         

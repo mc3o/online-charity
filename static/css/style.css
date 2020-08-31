@@ -1,0 +1,108 @@
+.form-text, .asteriskField{
+    display:none;
+}
+#kj{
+  font-family: 'Comfortaa', cursive;
+}
+
+#kl{
+  background-color: #A6DDB9;
+  padding: 3%;
+}
+
+#page{
+  font-family: 'Shanti', sans-serif;
+}
+
+#kk{
+  margin-bottom: 3%;
+}
+
+#login{
+  padding: 2%;
+  font-family: 'Shanti', sans-serif;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background-color: #A6DDB9;
+}
+
+#donor{
+  padding: 2%;
+  font-family: 'Shanti', sans-serif;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  background-color: #A6DDB9;
+}
+
+#logout{
+  padding: 2%;
+  font-family: 'Shanti', sans-serif;
+  margin-top: 2%;
+}
+
+#logout1{
+  background-color: #A6DDB9;
+  padding: 2%;
+}
+
+#ngo{
+  margin-bottom: 3%;
+}
+
+#ngo1{
+  background-color: #A6DDB9;
+  padding: 3%;
+}
+
+#ngo2{
+  font-family: 'Shanti', sans-serif;
+}
+
+#request{
+  background-color: #A6DDB9;
+  padding: 3%;
+  font-family: 'Shanti', sans-serif;
+  margin: 2%;
+}
+
+#welcome{
+  font-family: 'Shanti', sans-serif;
+}
+
+#welcome1{
+  font-family: 'Dancing Script', cursive;
+}
+
+#welcome2{
+  font-family: 'Acme', sans-serif;
+}
+
+#welcome3{
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
+#approved{
+  background-color: #A6DDB9;
+  margin: 3%;
+  padding-top: 3%;
+}
+
+#welcome4{
+  background-color: #A6DDB9;
+}
+
+#admin{
+  font-family: 'Shanti', sans-serif;
+}
+
+#admin1{
+  margin: 1%;
+}
+
+#donation{
+  background-color: #A6DDB9;
+  font-family: 'Shanti', sans-serif;
+  padding: 2%;
+  margin: 2%;
+}

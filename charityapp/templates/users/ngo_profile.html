@@ -1,35 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div id="ngo2">
     <div class="row content-section">
     
-        <div class="col-sm-12">
-            <div class="media" style="width: 40%; margin:1em auto;">
+        <div class="col-sm-12" id="ngo">
+            <div class="media" style="width: 61%; margin:1em auto;" >
                 {% if ngo.image %}
-                    <img src="{{ngo.image.url}}" alt="{{user.username}}" class="account-img">
+                    <img src="{{ngo.image.url}}" alt="{{user.username}}" class="rounded-circle img-responsive" width="190" height="180">
                         {%else%}
-                        No image
+                        <img src="../media/user.svg" alt="{{user.username}}" class="account-img" width="20%" height="20%">
                 {% endif %}
                 <div class="media-body" style="margin-left: 1em;">
                     <h5 class="account-heading">{{user.username}}</h5>
                     <p class="text-secondary">{{user.email}}</p>
-                    <p>{% if ngo.image %}
-                        {{ngo.image.url}}
-                        {%else%}
-                        No image
-                        {% endif %}
-                    </p>
                 </div>
             </div>
-            <div style="width: 80%; margin:0 auto">
+            <div class ="shadow-lg" style="width: 60%; margin:0 auto" id="ngo1">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <h5 class="text-danger text-center">Update NGO Profile Info</h5>
+                        <h5 class="text-center">Update NGO Profile Info</h5>
                         {{profile_form | crispy}}
                     </div>
                     <div class="form-group mt-0">
-                        <button type= "submit" class="btn btn-outline-info">Update</button>
+                        <button type= "submit" class="btn btn-outline-dark">Update</button>
                     </div>
                 </form>   
             </div>
@@ -37,9 +33,9 @@
         </div>
         
     </div>
-    <div class="row">
-        <h5>Donations made</h5>
+    <div class="row">  
         <div class="col-sm-12">
+            <h5>Donations made</h5>
             <table class="table">
                 <thead class="thead-dark">
                   <tr>
@@ -60,6 +56,6 @@
               </table>
         </div>
     </div>
-    
+</div>    
     
 {% endblock %}

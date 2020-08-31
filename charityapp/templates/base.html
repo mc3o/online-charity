@@ -13,6 +13,10 @@
     <script src="https://kit.fontawesome.com/fe77e56d10.js" crossorigin="anonymous"></script>
 
     {% block styles %}
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Shanti&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">  
     {% endblock %}
@@ -20,8 +24,8 @@
 </head>
 <body>
     <header class="site-header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Ch</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" id="kj" style="background:#0D5D56;">
+            <a class="navbar-brand" href="#">Charity</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,13 +35,10 @@
                     <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'register' %}">Register <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'reg-donor' %}">Register Donor<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" id="kj" href="{% url 'reg-donor' %}">Register Donor<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'reg-ngo' %}">Register NGO<span class="sr-only">(current)</span></a>
