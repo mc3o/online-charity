@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
+
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="row">       
-        <div class="col-md-6 offset-md-3 register">
+    <div class="row" >       
+        <div id="donor" class="col-md-6 offset-md-3 register shadow-lg" >
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <h4 class="mb-4 text-center">Register Donor</h4>
+                    <h4 class="mb-4 text-center">Register Donor</h4> 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             {{ form.firstname|as_crispy_field }}
@@ -43,11 +45,12 @@
     
                 </div>
                 <div class="form-group">
-                    <button type= "submit" class="btn btn-outline-info">Create account</button>
+
+                    <button type= "submit" class="btn btn-outline-dark">Create account</button>
                 </div>
             </form>
             <div class="pt-3">
-                <small class="text-muted">Already have an account? <a href="{% url 'login' %}" class="btn btn-outline-success">Login</a></small>
+                <small class="text-muted">Already have an account? <a href="{% url 'login' %}" class="btn btn-outline-success btn-sm">Login</a></small>
             </div>
         </div>
         
