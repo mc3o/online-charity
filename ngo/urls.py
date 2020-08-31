@@ -10,7 +10,7 @@ urlpatterns = [
     path('request/<int:pk>/', views.DonationDetailView.as_view(), name='donation-detail'),
     path('request/<int:pk>/update/', views.DonationUpdateView.as_view(), name='update-donation'),
     path('request/<int:pk>/delete/', views.DonationDeleteView.as_view(), name='delete-donation'),
-    path('add_cate/', views.add_category, name='add-category')
+    path('add_cate/', views.add_category, name='add-category'),
 
     # path('request/<int:id>/', views.donations_detail, name='donation-detail'),
 

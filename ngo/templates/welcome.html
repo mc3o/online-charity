@@ -6,10 +6,10 @@
         <h1 class="text-center" id="welcome2">Welcome to Charity</h1>
         <h3 class="text-center" id="welcome1">Any amount is welcome</h3>
     </div>
-    <div class="row" id="welcome">
-        <div class="col-sm-12">
+    <div class="col-md-12" id="welcome">
+        <div class="row">
             {% if user.is_authenticated and user.is_ngo%}
-            
+
             <b>Approved Donation Requests</b>
             {% for donation in app_donations %}
                 {% if user.username == donation.ngo.name %}
@@ -27,10 +27,10 @@
                         </div>
 
                     </div><br>
-                    
+
                 {% endif %}
             {% endfor %}
-            <a href="{% url 'request_donation' %}" class="btn btn-outline-primary btn-block">Request Donation</a href="{% url 'request_donation'%"><br><br>
+            <a href="{% url 'request_donation' %}" class="btn btn-outline-primary btn-block">Request Donation</a><br><br>
             <b>Pending Donations</b>
             {% for donation in rej_donations %}
                 {% if user.username == donation.ngo.name %}
@@ -52,9 +52,14 @@
             {% endfor %}
             
             {% endif %}
-            {% if user.is_authenticated and user.is_donor %}
+            <div class="col-md-12">
+                <div class="row">
+                    {% if user.is_authenticated and user.is_donor %}
                 {% for donation in app_donations %}
-                    <div class="card">
+
+
+                        <div class="col-md-3">
+                            <div class="card">
 
                         <div class="card-header text-center" id="welcome4">
                             <h3>{{donation.name}}</h3>
@@ -66,9 +71,14 @@
                             <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
                         </div>
                     </div><br>
+
+                    </div>
+
                 {% endfor %}
             {% endif %}
+                </div>
+            </div>
         </div>
-        
+
     </div>
 {% endblock %}

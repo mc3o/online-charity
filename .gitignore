@@ -4,3 +4,8 @@ __pycache__/
 .idea/
 virtual/
 venv/
+Pipfile
+Pipfile.lock
+db.sqlite3
+charity/settings.py
+ngo/migrations

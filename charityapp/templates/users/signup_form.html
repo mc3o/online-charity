@@ -1,58 +1,59 @@
 {% extends 'base.html' %}
-
-{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="row" >       
-        <div id="donor" class="col-md-6 offset-md-3 register shadow-lg" >
-            <form action="" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <h4 class="mb-4 text-center">Register Donor</h4> 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ form.firstname|as_crispy_field }}
+<div class="row text-center text-monospace">
+        <div class="col-md-6 offset-md-3 register text-center">
+            <div class="card w-75 shadow" style="margin-left: 20%; margin-top: 5%">
+            <div class="container">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h4 class="mb-4 text-center">Register Donor</h4>
+                        <hr>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ form.firstname|as_crispy_field }}
+                            </div>
 
+                            <div class="form-group col-md-6">
+                                {{ form.lastname|as_crispy_field }}
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            {{ form.lastname|as_crispy_field }}
+
+                        <div class="form-group">
+                            {{ form.username|as_crispy_field }}
                         </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form.phonenumber|as_crispy_field }}
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                {{ form.password1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                {{ form.password2|as_crispy_field }}
+                            </div>
+                        </div>
+
+
                     </div>
                     <div class="form-group">
-                            {{ form.username|as_crispy_field }}
+                        <figure class="row">
+                            <button type="submit" class="btn btn-sm btn-outline-info">Create account</button>
+                            <small class="text-muted"><a href="{% url 'login' %}"
+                                class="btn btn-sm btn-outline-success">Login</a></small>
+                        </figure>
                     </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ form.email|as_crispy_field }}
-
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ form.phonenumber|as_crispy_field }}
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            {{ form.password1|as_crispy_field }}
-
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ form.password2|as_crispy_field }}
-                        </div>
-                    </div>
-                    
-    
-                </div>
-                <div class="form-group">
-
-                    <button type= "submit" class="btn btn-outline-dark">Create account</button>
-                </div>
-            </form>
-            <div class="pt-3">
-                <small class="text-muted">Already have an account? <a href="{% url 'login' %}" class="btn btn-outline-success btn-sm">Login</a></small>
+                </form>
             </div>
         </div>
-        
     </div>
+</div>
 {% endblock %}
