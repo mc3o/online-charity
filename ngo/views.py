@@ -132,7 +132,7 @@ def add_category(request):
         form = CategoryForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(f'Category successfully added')
+            messages.success(request, f'Category successfully added')
             return redirect('admin_profile')
     else:
         form = CategoryForm()
