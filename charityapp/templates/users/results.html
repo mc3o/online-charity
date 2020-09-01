@@ -1,4 +1,4 @@
-{% extends 'user/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 
 <div class="container" style="margin-top:7%">
@@ -21,13 +21,11 @@
                 <div class="row">
                     </div>
                     <div class="col-md-6 mt-2">
-                        <span><strong><a href="{% url 'request/<int:pk>/' %}">donations</a></strong></span><br>
                         
                     </div>
             </div>
             <hr>
 
-            {% endfor %}
             {% endif %}
         </div>
         <div class="col-md-3"></div>

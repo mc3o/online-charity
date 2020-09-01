@@ -1,37 +1,102 @@
 .form-text, .asteriskField{
-    display:none;
+  display:none;
 }
+header{
+height: 30vh;
+background: #A6DDB9;
+background-image: url('../../media/hands.jpg');
+}
+
+.content{
+width: 60%;
+height: auto;
+margin: 0 auto;
+padding: 30px;
+
+}
+.content .nav-pills{
+  width: 100%;
+}
+.content .nav-item{
+  width: 50%;
+}
+.content .nav-pills .nav-link{
+  font-weight: bold;
+  padding-top: 13px;
+  text-align: center;
+  background: #343436;
+  color: #fff;
+  border-radius: 30px;
+  height: 5vh;
+}
+content .nav-pills .nav-link:hover{
+  cursor: pointer;
+}
+.content .nav-pills .nav-link.active{
+  background: #fff;
+  color: #000;
+}
+
+
 #kj{
-  font-family: 'Comfortaa', cursive;
+font-family: 'Comfortaa', cursive;
 }
 
 #kl{
-  background-color: #A6DDB9;
-  padding: 3%;
+background-color: rgba(166, 221, 185, 0.932);
+padding: 3%;
 }
 
 #page{
-  font-family: 'Shanti', sans-serif;
+font-family: 'Shanti', sans-serif;
 }
 
-#kk{
-  margin-bottom: 3%;
-}
+
 
 #login{
   padding: 2%;
   font-family: 'Shanti', sans-serif;
   margin-top: 2%;
   margin-bottom: 2%;
-  background-color: #A6DDB9;
-}
+  background-color: rgb(144, 148, 146);
+  color: #ffffff;
 
+}
+#login label{
+  text-align: center;
+  color: #ffffff;
+}
+#login button:first{
+  background: #d38a2a;
+}
+.links .donor,
+.links .ngo{
+  color: #ffffff;
+  background:#e9972d ;
+}
+.links .donor:hover,
+.links .ngo:hover{
+  color: #ffffff;
+  background:#e9982daf ;
+}
+.links small{
+  color: white;
+}
+.reset{
+  color: white;
+  font-size: 1rem;
+  padding: .5em;
+  margin-top: 2em;
+  border-radius: 2%;
+  background: brown;
+}
+.reset:hover{
+  background: rgba(165, 42, 42, 0.823);
+}
 #donor{
   padding: 2%;
   font-family: 'Shanti', sans-serif;
-  margin-top: 2%;
   margin-bottom: 2%;
-  background-color: #A6DDB9;
 }
 
 #logout{
@@ -41,68 +106,70 @@
 }
 
 #logout1{
-  background-color: #A6DDB9;
-  padding: 2%;
+background-color: #A6DDB9;
+padding: 2%;
 }
 
 #ngo{
-  margin-bottom: 3%;
+margin-bottom: 3%;
 }
 
 #ngo1{
-  background-color: #A6DDB9;
-  padding: 3%;
+background-color: #A6DDB9;
+padding: 2%;
 }
 
 #ngo2{
-  font-family: 'Shanti', sans-serif;
+font-family: 'Shanti', sans-serif;
 }
 
 #request{
-  background-color: #A6DDB9;
-  padding: 3%;
-  font-family: 'Shanti', sans-serif;
-  margin: 2%;
+background-color: #A6DDB9;
+padding: 3%;
+font-family: 'Shanti', sans-serif;
+margin: 2%;
 }
 
 #welcome{
-  font-family: 'Shanti', sans-serif;
+font-family: 'Shanti', sans-serif;
 }
 
 #welcome1{
-  font-family: 'Dancing Script', cursive;
+font-family: 'Dancing Script', cursive;
 }
 
 #welcome2{
-  font-family: 'Acme', sans-serif;
+font-family: 'Acme', sans-serif;
 }
 
 #welcome3{
-  margin-top: 5%;
-  margin-bottom: 2%;
+margin-top: 2%;
+margin-bottom: 2%;
+color: white;
 }
 
 #approved{
-  background-color: #A6DDB9;
-  margin: 3%;
-  padding-top: 3%;
+background-color: #A6DDB9;
+margin: 3%;
+padding-top: 3%;
 }
 
 #welcome4{
-  background-color: #A6DDB9;
+background-color: #c0cac4;
+
 }
 
 #admin{
-  font-family: 'Shanti', sans-serif;
+font-family: 'Shanti', sans-serif;
 }
 
 #admin1{
-  margin: 1%;
+margin: 1%;
 }
 
 #donation{
-  background-color: #A6DDB9;
-  font-family: 'Shanti', sans-serif;
-  padding: 2%;
-  margin: 2%;
+background-color: #A6DDB9;
+font-family: 'Shanti', sans-serif;
+padding: 2%;
+margin: 2%;
 }
