@@ -9,6 +9,9 @@
                             <p>{{object.name}}</p>
                             <p>{{object.description}}</p>
                             <p>{{object.target}}</p>
+
+                            <a href="{% url 'donate' object.id %}" class="btn btn-info">Donate</a>
+
                         </div>
                         <div class="col-sm-6">
                             <h5>Donations Received</h5>
@@ -39,11 +42,7 @@
                     </div>
                     
 
-                    <div class="card-footer">
-                        <a href="{% url 'update-donation' object.id %}" class="btn btn-outline-secondary">Update</a>
-                        <a href="{% url 'delete-donation' object.id %}" class="btn btn-outline-danger">Delete</a>
-
-                    </div>
+                    
 
                 </div>
             </div>

@@ -25,6 +25,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">NGO</th>
+                    <th scope="col">Target</th>
                     <th scope="col">Status</th>
                   </tr>
                 </thead>
@@ -35,6 +36,7 @@
                             <td>{{donation.name}}</td>
                             <td>{{donation.description}}</td>
                             <td>{{donation.ngo.name}}</td>
+                            <td>{{donation.target}}</td>
                             <td>
                                 {% if donation.status == False %} 
                                     <a href="{% url 'approve_request' donation.id %}" class="btn btn-danger">Not Approved</a> 

@@ -31,15 +31,51 @@ def welcome(request):
     }
     return render(request, 'welcome.html', context)
 
+class DonationDetailDonorView(DetailView):
+    model = Donation
+    template_name = 'ngo/donation_donor_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DonationDetailDonorView, self).get_context_data(**kwargs)
+        made_donations = MadeDonation.objects.filter(donation=self.object.id)
+        print(made_donations)
+        remaing_amm = 0
+        amm_donated = 0
+        for donation in made_donations:
+            amm_donated += int(donation.amount)
+
+        print(amm_donated)
+        remaing_amm = (int(self.object.target) - amm_donated)
+
+        context['donations'] = made_donations
+        context['amt_remaining'] = remaing_amm
+        return context
 
 class DonationDetailView(DetailView):
     model = Donation
+    template_name = 'ngo/donation_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DonationDetailView, self).get_context_data(**kwargs)
+        made_donations = MadeDonation.objects.filter(donation=self.object.id)
+        print(made_donations)
+        remaing_amm = 0
+        amm_donated = 0
+        for donation in made_donations:
+            amm_donated += int(donation.amount)
+
+        print(amm_donated)
+        remaing_amm = (int(self.object.target) - amm_donated)
+
+        context['donations'] = made_donations
+        context['amt_remaining'] = remaing_amm
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
 class DonationUpdateView(UpdateView):
     model = Donation
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'target']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -117,6 +153,7 @@ def make_donation(request, id):
         form = DonationForm(request.POST)
         if form.is_valid():
             don = form.save(commit=False)
+            # print(Donor.objects.filter(name=request.user))
             don.donor = donor
             don.donation = donation
             don.ngo = donation.ngo
