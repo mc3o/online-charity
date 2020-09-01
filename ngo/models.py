@@ -38,6 +38,7 @@ class Donation(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     ngo = models.ForeignKey(NGO, on_delete=models.CASCADE, null=True)
     status = models.BooleanField(default=False)
+    target = models.CharField(null=True, default=0, max_length=100)
 
 
     def save_donations(self):

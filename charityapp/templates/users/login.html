@@ -1,32 +1,24 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="">
-        <br>
-        <div class="container" >
-            <div class="card w-50 shadow" style="margin-left: 30%; margin-top: 13%">
-
-        <div id="login" class="col-md-6 offset-md-3">
+    <div class="row mt-1">
+        <div id="donor" class="col-md-6 offset-md-3 register shadow-lg">
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="form-group ">
                     {{form | crispy}}
                 </div>
                 <div class="form-group">
-                    <figure class="row">
-                        <button type= "submit" class="btn btn-sm btn-outline-info">Log in</button>
-                        <small class="text-muted"><a href="{% url 'reg-donor'%}" class="btn btn-sm btn-outline-success">Sign up</a></small>
-                        <small class="text-muted"><a href="{% url 'password_reset' %}" class="btn btn-sm btn-outline-danger">Reset password</a></small>
-                    </figure>
+                    <button type= "submit" class="btn btn-outline-dark">Log in</button>
                 </div>
             </form>
             <div class="pt-3 links">
-                <small class="text-muted">Need an account as a Donor? <a href="{% url 'reg-donor'%}" class="btn donor">Register Donor</a></small>
-                <small class="text-muted">Need an account as a NGO? <a href="{% url 'reg-ngo'%}" class="btn ngo">Register NGO</a></small><br>
+                <small class="text-muted">Need an account? <a href="{% url 'reg-donor'%}" class="btn donor">Register </a></small>
 
                 <small>Forgot password? <a href="{% url 'password_reset' %}" class="reset">Reset Password </a></small>
 
-    </div>
+            </div>
         </div>
     </div>
+        
 {% endblock %}

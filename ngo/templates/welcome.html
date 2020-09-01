@@ -20,6 +20,7 @@
                                         <h4>{{donation.description}}</h4>
                                         <p><b>Organisation:</b> {{donation.ngo.name}}</p>
                                         <p><b>Category:</b> {{donation.category.name}}</p>
+                                        <p><b>Target:- </b>{{donation.target}}</p>
                                         <a href="{% url 'donation-detail' donation.id %}" class="btn btn-success">View Details</a>
 
 
@@ -44,6 +45,8 @@
                                         <h3>{{donation.description}}</h3>
                                         <p><b>Organisation:</b> {{donation.ngo.name}}</p>
                                         <p><b>Category:</b> {{donation.category.name}}</p>
+                                        <p><b>Target:- </b>{{donation.target}}</p>
+
                                         <a href="{% url 'donation-detail' donation.id %}" class="btn btn-success">View Details</a>
 
 
@@ -74,6 +77,10 @@
                             <h4>{{donation.description}}</h4>
                             <p><b>Organisation:</b> {{donation.ngo.name}}</p>
                             <p><b>Category:</b> {{donation.category.name}}</p>
+                            <p><b>Target:- </b>{{donation.target}}</p>
+                            donation_donor_detail
+                            <a href="{% url 'donation_donor_detail' donation.id %}" class="btn btn-success">Details</a>
+
                             <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
                         </div>
                     </div>
