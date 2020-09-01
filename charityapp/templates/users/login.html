@@ -6,8 +6,7 @@
         <div class="container" >
             <div class="card w-50 shadow" style="margin-left: 30%; margin-top: 13%">
 
-        <div class="container " >
-            <div class=" login">
+        <div id="login" class="col-md-6 offset-md-3">
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="form-group ">
@@ -21,9 +20,11 @@
                     </figure>
                 </div>
             </form>
+            <div class="pt-3 links">
+                <small class="text-muted">Need an account as a Donor? <a href="{% url 'reg-donor'%}" class="btn donor">Register Donor</a></small>
+                <small class="text-muted">Need an account as a NGO? <a href="{% url 'reg-ngo'%}" class="btn ngo">Register NGO</a></small><br>
 
-        </div>
-        </div>
+                <small>Forgot password? <a href="{% url 'password_reset' %}" class="reset">Reset Password </a></small>
 
     </div>
         </div>

@@ -3,10 +3,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div id="ngo2">
-    <div class="row content-section">
+    <div class="row content-section mt-1">
     
-        <div class="col-sm-12" id="ngo">
-            <div class="media" style="width: 61%; margin:1em auto;" >
+       
+        <div class="col-sm-4">
+            <div class="media" >
                 {% if ngo.image %}
                     <img src="{{ngo.image.url}}" alt="{{user.username}}" class="rounded-circle img-responsive" width="190" height="180">
                         {%else%}
@@ -18,7 +19,9 @@
 
                 </div>
             </div>
-            <div class ="shadow-lg" style="width: 60%; margin:0 auto" id="ngo1">
+        </div>
+        <div class="col-sm-8" >
+            <div class ="shadow-lg" id="ngo1">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
@@ -30,19 +33,19 @@
                     </div>
                 </form>   
             </div>
-                     
         </div>
         
     </div>
 
     <div class="row">  
         <div class="col-sm-12">
-            <h5>Donations made</h5>
+            <h5>Donations Received</h5>
             <table class="table">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">Donor</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">Donation Request Title</th>
                     <th scope="col">Nature</th>
                   </tr>
                 </thead>
@@ -51,6 +54,8 @@
                         <tr>
                             <td>{{donation.donor}}</td>
                             <td>{{donation.amount}}</td>
+                            <td>{{donation.donation.name}}</td>
+                            <td>{{donation.donation.category}}</td>
                             
                         </tr>
                   {% endfor %}                  

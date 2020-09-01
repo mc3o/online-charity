@@ -1,12 +1,34 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="row text-center text-monospace">
-        <div class="col-md-6 offset-md-3 register text-center">
-            <div class="card w-75 shadow" style="margin-left: 20%; margin-top: 5%">
-            <div class="container">
-                <form action="" method="POST">
-                    {% csrf_token %}
+<div class="col-sm-12 content">
+
+    <ul class="nav nav-pills" id="pills-tab" role="tablist" style="text-align:center;">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active"  href="{% url 'reg-ngo' %}">NGO</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link " href="{% url 'reg-donor' %}">Donor</a>
+        </li>            
+        </ul>
+        
+</div>    
+<div class="row" id="pills-donor">
+    <div class="col-sm-12">
+        <div class="col-md-6 offset-md-3 shadow-lg" >
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h4 class="mb-4 text-center">Register Donor</h4> 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ form.firstname|as_crispy_field }}
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.lastname|as_crispy_field }}
+                        </div>
+                    </div>
                     <div class="form-group">
                         <h4 class="mb-4 text-center">Register Donor</h4>
                         <hr>
@@ -56,4 +78,6 @@
         </div>
     </div>
 </div>
+    
+    
 {% endblock %}
