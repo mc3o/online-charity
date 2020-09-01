@@ -12,6 +12,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+
 # Create your views here.
 
 def welcome(request):
@@ -26,12 +27,14 @@ def welcome(request):
             rej_donations.append(donation)
     context = {
         'app_donations': app_donations,
-        'rej_donations': rej_donations,        
+        'rej_donations': rej_donations,
     }
     return render(request, 'welcome.html', context)
 
+
 class DonationDetailView(DetailView):
     model = Donation
+
 
 @method_decorator(login_required, name='dispatch')
 class DonationUpdateView(UpdateView):
@@ -60,12 +63,14 @@ class DonationDeleteView(DeleteView):
             return True
         return False
 
+
 def donations_detail(request, id):
     donation = Donation.objects.filter(id=id).first()
     context = {
         'donation': donation,
     }
     return render(request, 'donation-detail.html', context)
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_profile(request):
@@ -77,6 +82,7 @@ def admin_profile(request):
     }
     return render(request, 'admin_profile.html', context)
 
+
 @ngo_required
 def request_donation(request):
     user = request.user
@@ -84,20 +90,21 @@ def request_donation(request):
     if request.method == 'POST':
         form = RequestForm(request.POST)
         if form.is_valid():
-            don = form.save(commit=False)            
-            don.ngo=ngo
+            don = form.save(commit=False)
+            don.ngo = ngo
             don.save()
-            
+
             return HttpResponseRedirect('/')
 
     else:
         form = RequestForm()
         return render(request, 'request-form.html', {"form": form})
 
+
 @login_required
 def approve_request(request, id):
     donation = Donation.objects.filter(id=id).first()
-    donation.status=True
+    donation.status = True
     donation.save()
     return render(request, 'donation_approval.html')
 
@@ -107,27 +114,27 @@ def make_donation(request, id):
     donation = Donation.objects.filter(id=id).first()
     donor = Donor.objects.filter(name=request.user).first()
     if request.method == 'POST':
-        form = DonationForm(request.POST)   
+        form = DonationForm(request.POST)
         if form.is_valid():
             don = form.save(commit=False)
-            don.donor=donor
-            don.donation=donation
-            don.ngo=donation.ngo
+            don.donor = donor
+            don.donation = donation
+            don.ngo = donation.ngo
             don.save()
-            
+
             return HttpResponseRedirect('/')
 
     else:
         form = DonationForm()
         context = {
-            'form':form,
+            'form': form,
             'donation': donation
         }
         return render(request, 'donationforms.html', context)
-   
+
+
 @user_passes_test(lambda u: u.is_superuser)
 def add_category(request):
-    
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
@@ -137,4 +144,3 @@ def add_category(request):
     else:
         form = CategoryForm()
         return render(request, 'category_form.html', {"form": form})
-    

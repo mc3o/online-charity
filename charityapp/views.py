@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from .forms import ( SignUpForm, UserUpdateForm, ProfileUpdateForm, 
+from .forms import (SignUpForm, UserUpdateForm, ProfileUpdateForm,
                     NgoSignUpForm, DonorSignupForm, NgoUpdateForm,
                     DonorUpdateForm)
 
@@ -13,11 +13,10 @@ from .models import User, Donor, NGO
 from ngo.models import MadeDonation
 
 
-
-
 # Create your views here.
 def index(request):
     return render(request, 'users/welcome.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -35,6 +34,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'users/signup.html', {'form': form})
+
 
 @login_required
 def profile(request):
@@ -71,11 +71,12 @@ class DonorSignUpView(CreateView):
         login(self.request, user)
         username = form.cleaned_data.get('username')
         email = form.cleaned_data.get('email')
-        image = form.cleaned_data.get('image')       
+        image = form.cleaned_data.get('image')
         messages.success(self.request, f'Account created')
         send_welcome_email(username, email)
 
         return redirect('welcome')
+
 
 class NgoSignUpView(CreateView):
     model = User
@@ -93,7 +94,7 @@ class NgoSignUpView(CreateView):
         username = form.cleaned_data.get('username')
         email = form.cleaned_data.get('email')
         send_welcome_email(username, email)
-        
+
         return redirect('welcome')
 
 
@@ -117,6 +118,7 @@ def donor_profile(request):
         'donations': donations_made
     }
     return render(request, 'users/donor_profile.html', content)
+
 
 @ngo_required
 def ngo_profile(request):
@@ -142,13 +144,13 @@ def ngo_profile(request):
 
 @login_required
 def search_donations(request):
-    if 'search_donations' in request.GET :
+    if 'search_donations' in request.GET:
         name = request.GET.get("search_donations")
         print(name)
         message = f'name'
         params = {
             'results': name,
-            
+
         }
         return render(request, 'users/results.html', params)
     else:
