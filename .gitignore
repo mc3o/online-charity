@@ -7,4 +7,3 @@ venv/
 Pipfile
 Pipfile.lock
 db.sqlite3
-ngo/migrations
