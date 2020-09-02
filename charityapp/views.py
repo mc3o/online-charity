@@ -10,7 +10,7 @@ from .emails import send_welcome_email
 from .decorators import donor_required, ngo_required
 from django.views.generic import CreateView
 from .models import User, Donor, NGO
-from ngo.models import MadeDonation
+from ngo.models import MadeDonation, Donation, Category
 
 
 # Create your views here.
@@ -146,10 +146,19 @@ def ngo_profile(request):
 def search_donations(request):
     if 'search_donations' in request.GET:
         name = request.GET.get("search_donations")
-        print(name)
+        cat_id = Category.objects.filter(name=name).first()
+
+        donation_req = Donation.objects.filter(category=cat_id).order_by('-pub_date')
+        # print(donation_req)
+        approved_donations = []
+        for donation in donation_req:
+            if donation.status == True:
+                approved_donations.append(donation)
+        print(approved_donations)
         message = f'name'
         params = {
-            'results': name,
+            'results': approved_donations,
+            'name':name
 
         }
         return render(request, 'users/results.html', params)

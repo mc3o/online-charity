@@ -7,20 +7,21 @@ from django.db import transaction
 
 
 class SignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    firstname = forms.CharField(max_length=100)
-    lastname = forms.CharField(max_length=100)
+    email = forms.EmailField(max_length=254, label='Email', widget=forms.TextInput(attrs={'placeholder':'abc@xyz.com'}))
+    firstname = forms.CharField(max_length=100, label='FirstName', widget=forms.TextInput(attrs={'placeholder':'firstname'}))
+    lastname = forms.CharField(max_length=100, label='LastName', widget=forms.TextInput(attrs={'placeholder':'lastname'}))
+    username = forms.CharField(max_length=100, label='Username', widget=forms.TextInput(attrs={'placeholder':'username'}))
     class Meta:
         model = User
         fields = ('username','firstname', 'lastname', 'email', 'password1', 'password2')
 
 
 class NgoSignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    username = forms.CharField(max_length=100)
-    location = forms.CharField(max_length=100)
-    url = forms.URLField()
-    phonenumber = forms.CharField()
+    email = forms.EmailField(max_length=254, label='Email',widget=forms.TextInput(attrs={'placeholder':'abc@xyz.com'}))
+    username = forms.CharField(max_length=100, label='Username',widget=forms.TextInput(attrs={'placeholder':'username'}))
+    location = forms.CharField(max_length=100, label='Location',widget=forms.TextInput(attrs={'placeholder':'100 abc street'}))
+    url = forms.URLField(initial='http://')
+    phonenumber = forms.CharField( label='PhoneNumber',widget=forms.TextInput(attrs={'placeholder':'075358901'}))
     image = forms.ImageField()
 
     class Meta(UserCreationForm.Meta):
@@ -40,7 +41,6 @@ class NgoSignUpForm(UserCreationForm):
         phone = self.cleaned_data.get('phonenumber')
         image = self.cleaned_data.get('image')
 
-        print(image)
         ngo = NGO.objects.create(
             user=user, 
             name=username,
@@ -52,10 +52,11 @@ class NgoSignUpForm(UserCreationForm):
             )
         return user
 class DonorSignupForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    firstname = forms.CharField(max_length=100)
-    lastname = forms.CharField(max_length=100)
-    phonenumber = forms.CharField()
+    email = forms.EmailField(max_length=254, label='Email', widget=forms.TextInput(attrs={'placeholder':'abc@xyz.com'}))
+    firstname = forms.CharField(max_length=100, label='FirstName', widget=forms.TextInput(attrs={'placeholder':'firstname'}))
+    lastname = forms.CharField(max_length=100, label='LastName', widget=forms.TextInput(attrs={'placeholder':'lastname'}))
+    username = forms.CharField(max_length=100, label='Username', widget=forms.TextInput(attrs={'placeholder':'username'}))
+    phonenumber = forms.CharField(label='Phonenumber', widget=forms.TextInput(attrs={'placeholder':'phonenumber'}))
 
     class Meta(UserCreationForm.Meta):
         model = User

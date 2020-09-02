@@ -16,6 +16,7 @@ class RequestForm(forms.ModelForm):
         fields=['name','description','category', 'target']
 
 class CategoryForm(forms.ModelForm):
+    name = forms.CharField(label='Name',widget=forms.TextInput(attrs={'placeholder':'category name'}))
 
     class Meta:
         model = Category
