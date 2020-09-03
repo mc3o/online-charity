@@ -16,7 +16,7 @@ from django.contrib import messages
 # Create your views here.
 
 def welcome(request):
-    donations = Donation.objects.all()
+    donations = Donation.objects.order_by('-pub_date')
 
     app_donations = []
     rej_donations = []
@@ -111,10 +111,19 @@ def donations_detail(request, id):
 @user_passes_test(lambda u: u.is_superuser)
 def admin_profile(request):
     donation_req = Donation.display_all_donations()
+    app_donations = []
+    rej_donations = []
+    for donation in donation_req:
+        if donation.status == True:
+            app_donations.append(donation)
+        else:
+            rej_donations.append(donation)
     categories = Category.objects.all()
     context = {
         'donations': donation_req,
-        'categories': categories
+        'categories': categories,
+        'app_donations': app_donations,
+        'rej_donations': rej_donations
     }
     return render(request, 'admin_profile.html', context)
 
