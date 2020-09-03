@@ -105,9 +105,11 @@
                                     <p>{{donation.description}}</p>
 
                                     <p><b style="color: indianred; font-weight:bold;">Target:- </b>{{donation.target}}</p>
+                                    <br><br>
                                     <a href="{% url 'donation_donor_detail' donation.id %}" class="btn btn-success">Details</a>
 
                                     <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
+                                    <br>
                                     <div class="cont_infos">
                                         <div class="postedBy">
                                             <span>Organisation</span>
