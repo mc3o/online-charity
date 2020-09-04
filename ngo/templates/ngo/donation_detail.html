@@ -40,9 +40,10 @@
                     
 
                     <div class="card-footer">
+                        {% if user.is_authenticated and user.is_ngo %}
                         <a href="{% url 'update-donation' object.id %}" class="btn btn-outline-secondary">Update</a>
                         <a href="{% url 'delete-donation' object.id %}" class="btn btn-outline-danger">Delete</a>
-
+                        {% endif %}
                     </div>
 
                 </div>
