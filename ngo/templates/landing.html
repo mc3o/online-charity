@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Charity</title>
+     <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+     <!-- Google Fonts -->
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+     <!-- Bootstrap core CSS -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Material Design Bootstrap -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+     <!-- css -->
+     <link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}"> 
+</head>
+<body class="landing">
+    <section >
+        <div class="container">
+            <div class="card w-50  text-center" style="margin-left: 25%; margin-top: 15%;">
+                <div class=" gradient-card-header success-color">
+                    <!-- Title -->
+                    <h2 class="card-header-title">online-charity</h2>
+                    <!-- Subtitle -->
+                    <h5 class="mb-0 pb-3 pt-2">Any amount is welcome</h5>
+                </div>
+                <div class="card-body text-center">
+                    <!-- Text -->
+                    <p class="">
+                        Love is not patronizing and charity isn't about pity, it is about love. Charity and love are the
+                        same, with charity you give love, so don't just give money but reach out your hand instead. <br>
+                        <small class="text-muted">~ Mother Teresa</small>
+                    </p>
+                    <section class="modal-footer">
+                        <figure class="col-md-12">
+                            <div class="row">
+                                <a href="{% url 'login' %}"><button class="btn btn-outline-primary btn-sm">login</button></a>
+                                <a href="{% url 'reg-donor'%}" class="ml-auto"><button class="btn btn-outline-success btn-sm ml-auto">register</button> </a>
+                                
+                            </div>
+                        </figure>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- JQuery -->
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <!-- Bootstrap tooltips -->
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+     </script>
+     <!-- Bootstrap core JavaScript -->
+     <script type="text/javascript"
+         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+     <!-- MDB core JavaScript -->
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js">
+     </script>
+</body>
+</html>
