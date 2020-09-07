@@ -11,6 +11,8 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic.edit import FormMixin
+
 
 
 # Create your views here.
@@ -31,14 +33,19 @@ def welcome(request):
     }
     return render(request, 'welcome.html', context)
 
-class DonationDetailDonorView(DetailView):
+@method_decorator(login_required, name='dispatch')
+class DonationDetailDonorView(FormMixin, DetailView):
     model = Donation
     template_name = 'ngo/donation_donor_detail.html'
+    form_class = DonationForm
+
+    def get_success_url(self):
+        return reverse('donation_donor_detail', kwargs={'pk': self.object.id})
+
 
     def get_context_data(self, **kwargs):
         context = super(DonationDetailDonorView, self).get_context_data(**kwargs)
         made_donations = MadeDonation.objects.filter(donation=self.object.id)
-        print(made_donations)
         remaing_amm = 0
         amm_donated = 0
         for donation in made_donations:
@@ -49,7 +56,28 @@ class DonationDetailDonorView(DetailView):
 
         context['donations'] = made_donations
         context['amt_remaining'] = remaing_amm
+        context['form'] = DonationForm(initial={'donation': self.object})
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        print(self.object.id)
+        donation = Donation.objects.filter(id=self.object.id).first()
+        donor = Donor.objects.filter(name=self.request.user).first()
+        form.instance.donor = donor
+        form.instance.donation = donation
+        form.instance.ngo = donation.ngo
+              
+        form.save()
+        
+        return super(DonationDetailDonorView, self).form_valid(form)
 
 class DonationDetailView(DetailView):
     model = Donation
@@ -70,6 +98,9 @@ class DonationDetailView(DetailView):
         context['donations'] = made_donations
         context['amt_remaining'] = remaing_amm
         return context
+
+    
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -110,6 +141,13 @@ def donations_detail(request, id):
 
 @user_passes_test(lambda u: u.is_superuser)
 def admin_profile(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Category successfully added')
+            return redirect('admin_profile')
+    form = CategoryForm()
     donation_req = Donation.display_all_donations()
     app_donations = []
     rej_donations = []
@@ -123,7 +161,8 @@ def admin_profile(request):
         'donations': donation_req,
         'categories': categories,
         'app_donations': app_donations,
-        'rej_donations': rej_donations
+        'rej_donations': rej_donations,
+        "form": form
     }
     return render(request, 'admin_profile.html', context)
 
@@ -149,6 +188,7 @@ def request_donation(request):
 @login_required
 def approve_request(request, id):
     donation = Donation.objects.filter(id=id).first()
+    print(donation)
     donation.status = True
     donation.save()
     return render(request, 'donation_approval.html')

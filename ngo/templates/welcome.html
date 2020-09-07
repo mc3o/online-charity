@@ -105,9 +105,9 @@
                                     <p>{{donation.description}}</p>
 
                                     <p><b style="color: indianred; font-weight:bold;">Target:- </b>{{donation.target}}</p>
-                                    <a href="{% url 'donation_donor_detail' donation.id %}" class="btn btn-success">Details</a>
+                                    <p>Remaining amount:- </p>
+                                    <a href="{% url 'donation_donor_detail' donation.id %}" class="btn btn-success">More Details</a>
 
-                                    <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
                                     <div class="cont_infos">
                                         
                                         <div class="postedBy">

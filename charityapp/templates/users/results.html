@@ -21,13 +21,35 @@
         <div class="col-sm-12">
             {% for result in results %}
 
-                <div class="card m-1">
-                    <div class="card-body">
-                        <h5>Title:- {{result.name }}</h5>
-                        <p>Description:- {{result.description}}</p>
-                        <p>NGO:- {{result.ngo.name}}</p>
+               
+                <div class="cont">
+                    <div class="post"> 
+                        <div class="body_post">
+                            <div class="post_content">
+                                <h1>{{result.name }}</h1>
+                                <p>{{result.description}}</p>
+
+                                <p><b style="color: indianred; font-weight:bold;">Target:- </b>{{donation.target}}</p>
+                                <a href="{% url 'donation_donor_detail' result.id %}" class="btn btn-success">View Details</a>
+
+                                <div class="cont_infos">
+                                    <div class="postedBy">
+                                        <span>Organisation</span>
+                                        {{result.ngo.name}}
+                                    </div>
+                
+                                    <div class="cont_tags">
+                                        <span>Category</span>
+                                        <div class="tags">
+                                            <p>{{result.category.name}}</p>
+                                        </div>
+                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div> 
                 {% endfor %}
         </div>
         
