@@ -100,71 +100,76 @@
                     </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <h5 class="text-center text-danger">Pending Donation Requests</h5>
-                    <table class="table table-bordered" style="background: rgb(221, 220, 220);">
-                        <thead class="black white-text text-monospace text-uppercase">
-                          <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">NGO</th>
-                            <th scope="col">Target</th>
-                            <th scope="col">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% for donation in rej_donations %}
-                                <tr>
-                                    <th scope="row">{{donation.id}}</th>
-                                    <td>{{donation.name}}</td>
-                                    <td>{{donation.description}}</td>
-                                    <td>{{donation.ngo.name}}</td>
-                                    <td>{{donation.target}}</td>
-                                    <td>
-                                        <a href="{% url 'approve_request' donation.id %}" class="btn ntn-md btn-outline-danger">Not Approved</a>
-                                        
-                                    </td>
-                                </tr>
-                          {% endfor %}                  
-                        </tbody>
-                      </table>
-                </div>
-                <div class="col-sm-6">
-                    <h5 class="text-center text-success">Approved Donation Requests</h5>
-                    <table class="table table-bordered" style="background: rgb(221, 220, 220);">
-                        <thead class="black white-text text-monospace text-uppercase">
-                          <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">NGO</th>
-                            <th scope="col">Target</th>
-                            <th scope="col">Status</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% for donation in app_donations %}
-                                <tr>
-                                    <th scope="row">{{donation.id}}</th>
-                                    <td>{{donation.name}}</td>
-                                    <td>{{donation.description}}</td>
-                                    <td>{{donation.ngo.name}}</td>
-                                    <td>{{donation.target}}</td>
-                                    <td>
-                                        
-                                        <button class="btn btn-md btn-outline-success">Approved</button>
-                                    </td>
-                                </tr>
-                          {% endfor %}                  
-                        </tbody>
-                      </table>
-                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5 class="text-center text-danger">Pending Donation Requests</h5>
+                            <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                                <thead class="black white-text text-monospace text-uppercase">
+                                  <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">NGO</th>
+                                    <th scope="col">Target</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for donation in rej_donations %}
+                                        <tr>
+                                            <th scope="row">{{donation.id}}</th>
+                                            <td>{{donation.name}}</td>
+                                            <td>{{donation.description}}</td>
+                                            <td>{{donation.ngo.name}}</td>
+                                            <td>{{donation.target}}</td>
+                                            <td>
+                                                <a href="{% url 'approve_request' donation.id %}" class="btn ntn-md btn-outline-danger">Not Approved</a>
+                                                
+                                            </td>
+                                        </tr>
+                                  {% endfor %}                  
+                                </tbody>
+                              </table>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5 class="text-center text-success">Approved Donation Requests</h5>
+                            <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                                <thead class="black white-text text-monospace text-uppercase">
+                                  <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">NGO</th>
+                                    <th scope="col">Target</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for donation in app_donations %}
+                                        <tr>
+                                            <th scope="row">{{donation.id}}</th>
+                                            <td>{{donation.name}}</td>
+                                            <td>{{donation.description}}</td>
+                                            <td>{{donation.ngo.name}}</td>
+                                            <td>{{donation.target}}</td>
+                                            <td>
+                                                
+                                                <button class="btn btn-md btn-outline-success">Approved</button>
+                                            </td>
+                                        </tr>
+                                  {% endfor %}                  
+                                </tbody>
+                              </table>
+                        </div>
+                        
+                    </div>
                 
-            </div>
-        
-        </div>
-        {% endif %}
+                </div>
+                {% endif %}
+                    </div>
+                </div>
         
         {% endblock %}    </main>
     {% block scripts %}
