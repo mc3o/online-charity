@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div id="ngo2">
+    <div class="row content-section mt-1">
+    
+       
+        <div class="col-sm-4">
+            <div class="media" >
+                {% if ngo.image %}
+                    <img src="{{ngo.image.url}}" alt="{{user.username}}" class="rounded-circle img-responsive" width="190" height="180">
+                        {%else%}
+                        <img src="../media/user.svg" alt="{{user.username}}" class="account-img" width="20%" height="20%">
+                {% endif %}
+                <div class="media-body" style="margin-left: 1em;">
+                    <h5 class="account-heading">{{user.username}}</h5>
+                    <p class="text-secondary">{{user.email}}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8" >
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Update profile
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class ="shadow-lg" id="ngo1">
+                            <form action="" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <h5 class="text-center">Update NGO Profile Info</h5>
+                                    {{profile_form | crispy}}
+                                </div>
+                                <div class="form-group mt-0">
+                                    <button type= "submit" class="btn btn-outline-dark">Update</button>
+                                </div>
+                            </form>   
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="row">  
+        <div class="col-sm-12">
+            <h5>Donations Received</h5>
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Donor</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Donation Request Title</th>
+                    <th scope="col">Nature</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for donation in donations %}
+                        <tr>
+                            <td>{{donation.donor}}</td>
+                            <td>{{donation.amount}}</td>
+                            <td>{{donation.donation.name}}</td>
+                            <td>{{donation.donation.category}}</td>
+                            
+                        </tr>
+                  {% endfor %}                  
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+</div>    
+    
+{% endblock %}

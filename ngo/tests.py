@@ -1,8 +1,33 @@
 from django.test import TestCase
-from .models import Donations, Category
+from .models import NGO
+from .models import Donation, Category
 import datetime as dt
 
+
 # Create your tests here.
+# class NGOTestCase(TestCase):
+#     def setUp(self):
+#         self.new_ngo = NGO(name="orphanblack", location='kenya', case='orphanage donations', phone='+2547123456789',
+#                            email='email@gmail.com')
+
+#     def tearDown(self):
+#         NGO.objects.all().delete()
+
+#     def test_instance(self):
+#         self.assertTrue(isinstance(self.new_ngo, NGO))
+
+#     def test_save_ngo(self):
+#         self.new_ngo.create_ngo()
+#         ngo = NGO.objects.all()
+#         self.assertTrue(len(ngo) > 0)
+
+#     def test_delete_ngo(self):
+#         self.new_ngo.create_ngo()
+#         self.new_ngo.delete_ngo()
+#         ngo = NGO.objects.all()
+#         self.assertEqual(len(ngo), 0)
+
+
 class CategoryTest(TestCase):
     def setUp(self):
         '''new instance before test'''
@@ -37,13 +62,13 @@ class DonationTestClass(TestCase):
     def setUp(self):
     
         self.disaster = Category( name= "disaster")
-        self.samaritan = Donations(name ='Cry for help', description = 'Donation towards those affected by the recent floods', category= self.disaster, photo_image = "wreck.jpg")
+        self.samaritan = Donation(name ='Cry for help', description = 'Donation towards those affected by the recent floods', category= self.disaster, photo_image = "wreck.jpg")
 
     def tearDown(self):
        
-        Donations.objects.all().delete()
+        Donation.objects.all().delete()
         Category.objects.all().delete()
 
     def test_donations_instance(self):
        
-        self.assertTrue(isinstance(self.samaritan, Donations))
+        self.assertTrue(isinstance(self.samaritan, Donation))

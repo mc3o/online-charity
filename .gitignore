@@ -1,4 +1,9 @@
-venv/
+virtual/
 __pycache__/
 .env
+.idea/
 virtual/
+venv/
+Pipfile
+Pipfile.lock
+db.sqlite3

@@ -1,0 +1,304 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+        <title>Charity | {{title}}</title>
+    {% else %}
+
+        <title> Charity </title> 
+    {% endif %}
+    <script src="https://kit.fontawesome.com/fe77e56d10.js" crossorigin="anonymous"></script>
+
+    {% block styles %}
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Shanti&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">   
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">     
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">  
+    {% endblock %}
+  
+</head>
+<body style="background:white ;">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'welcome' %}">Charity Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">            
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'welcome' %}">Site <span class="sr-only">(current)</span></a>
+                    </li>           
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout </a>
+                    </li>           
+                </ul>
+            </div>
+        </nav>
+        
+    </header>
+    <main class="container-fluid" role="main" >
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}} mt-1">
+                {{message}}
+            </div>
+        {% endfor %}
+        {% endif %}
+        {% block content %}
+        {% if user.is_authenticated and user.is_superuser %}
+        <div class="row" >
+            <div class="col-3 p-0 h-100 d-inline-block">
+              <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">All Categories
+                    &nbsp; &nbsp;&nbsp;<span class="badge badge-light">{{categories | length}} Categories</span> 
+                </a>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Donation Requests 
+                    &nbsp; &nbsp;&nbsp;<span class="badge badge-danger">{{rej_donations | length}} requests</span>
+                </a>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-donor-list" data-toggle="list" href="#list-donor" role="tab" aria-controls="donor">Donors
+                    &nbsp; &nbsp;&nbsp;<span class="badge badge-light">{{donors | length}} donors</span> 
+
+                </a>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-ngo-list" data-toggle="list" href="#list-ngo" role="tab" aria-controls="ngo">NGO's
+                    &nbsp; &nbsp;&nbsp;<span class="badge badge-light">{{ngos | length}} ngos</span> 
+
+                </a>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <div class="row">
+                        <div class="btn btn-warning">
+                            <a href="" data-toggle="modal" data-target="#exampleModalCenter">Add Category</a>
+                        </div>
+                        <div class="col-sm-12">
+                            
+                            <p>
+                                {% for category in categories %}
+                                <div class="">
+                                    {{category.name}}
+                                    <span class="btn btn-danger btn-sm" data-target="#deleCatModal{{category.id}}" data-toggle="modal">X</span>
+                                </div>
+                                    
+                                
+                            </p>
+                            <!-- delete Cat Modal -->
+                            <div class="modal fade" id="deleCatModal{{category.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Category</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete 
+                                            <span style="font-weight: bold;">{{category.name}}</span>
+                                        </p>                                       
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'delete_cat' category.id %}" class="btn btn-outline-danger" >Yes</a>
+                                        <button type="button" class="btn btn-outline- secondary" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- modal -->
+                            {% endfor %}
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Add Donation Category</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{% url 'add-category' %}" method="post">
+                                            {% csrf_token %}
+                                            
+                                            {{ form|crispy}}
+                                            <input type="hidden" name="next" value="{{ request.path }}">
+                                            <button class="btn btn-secondary" type="submit">Add</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- modal -->
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5 class="text-center text-danger">Pending Donation Requests</h5>
+                            <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                                <thead class="black white-text text-monospace text-uppercase">
+                                  <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">NGO</th>
+                                    <th scope="col">Target</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for donation in rej_donations %}
+                                        <tr>
+                                            <th scope="row">{{donation.id}}</th>
+                                            <td>{{donation.name}}</td>
+                                            <td>{{donation.description}}</td>
+                                            <td>{{donation.ngo.name}}</td>
+                                            <td>{{donation.target}}</td>
+                                            <td>
+                                                <a href="{% url 'approve_request' donation.id %}" class="btn ntn-md btn-outline-danger">Not Approved</a>
+                                                
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'delete_request' %}">Delete Request</a>
+                                            </td>
+                                        </tr>
+                                  {% endfor %}                  
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h5 class="text-center text-success">Approved Donation Requests</h5>
+                            <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                                <thead class="black white-text text-monospace text-uppercase">
+                                  <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">NGO</th>
+                                    <th scope="col">Target</th>
+                                    <th scope="col">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for donation in app_donations %}
+                                        <tr>
+                                            <th scope="row">{{donation.id}}</th>
+                                            <td>{{donation.name}}</td>
+                                            <td>{{donation.description}}</td>
+                                            <td>{{donation.ngo.name}}</td>
+                                            <td>{{donation.target}}</td>
+                                            <td>                                                
+                                                <button class="btn btn-md btn-outline-success">Approved</button>
+                                            </td>
+                                        </tr>
+                                  {% endfor %}                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        
+                </div>
+                <div class="tab-pane fade" id="list-donor" role="tabpanel" aria-labelledby="list-donor-list">
+                   <div class="row">
+                    <h5 class="text-center">All donors</h5>
+                    <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                        <thead class="black white-text text-monospace text-uppercase">
+                          <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for donor in donors %}
+                                <tr>
+                                    <th scope="row">{{donor.user_id}}</th>
+                                    <td>{{donor.name}}</td>
+                                    <td>{{donor.email}}</td>
+                                </tr>
+                          {% endfor %}                  
+                        </tbody>
+                    </table>
+                   </div>
+                        
+                        
+                </div>
+                <div class="tab-pane fade" id="list-ngo" role="tabpanel" aria-labelledby="list-ngo-list">
+                    <div class="row">
+                        <h5 class="text-center">All ngos</h5>
+                        <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                            <thead class="black white-text text-monospace text-uppercase">
+                              <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Location</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for ngo in ngos %}
+                                    <tr>
+                                        <th scope="row">{{ngo.user_id}}</th>
+                                        <td>{{ngo.name}}</td>
+                                        <td>{{ngo.email}}</td>
+                                        <td>{{ngo.location}}</td>
+                                        
+                                    </tr>
+                              {% endfor %}                  
+                            </tbody>
+                        </table>
+                    </div>
+                         
+                         
+                 </div>
+            </div>
+        {% endif %}
+        {% endblock %} 
+   </main>
+    {% block scripts %}
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+    {% endblock %}
+
+</body>
+</html>
