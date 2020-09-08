@@ -21,7 +21,24 @@ cd online-charity
 ##### Install Dependencies  
  ```bash 
  pipenv install -r requirements.txt 
-```  
+``` 
+ ##### Add the following to the env file
+  ```bash
+ SECRET_KEY = your secret key
+ DEBUG=TRUE
+ DB_NAME=''
+ DB_USER='database user name'
+ DB_PASSWORD='database password'
+ DB_HOST='127.0.0.1'
+ MODE='dev'
+ ALLOWED_HOSTS='*'
+ DISABLE_COLLECTSTATIC=1
+ EMAIL_USE_TLS = True
+ EMAIL_HOST = 'smtp.gmail.com'
+ EMAIL_PORT = 587
+ EMAIL_HOST_USER = 'your email'
+ EMAIL_HOST_PASSWORD = '<>'
+ ```
  ##### Setup Database  
   SetUp your database User,Password, Host then make migrate  
  ```bash 
