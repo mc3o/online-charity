@@ -32,7 +32,13 @@
   
 </head>
 <body>
-    <header class="site-header" style="height: 30vh; background:#0D5D56">
+    <header class="site-header" style=
+        "background: url('../../media/help.jpg'); 
+        height:50vh;
+        background-repeat:no-repeat;
+        background-size:cover;
+        object-fit: cover;" 
+     >
         <nav class="navbar navbar-expand-lg navbar-dark" id="kj" style="background:#0D5D56;">
             <a class="navbar-brand" href="{% url 'welcome' %}">Charity</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,6 +105,36 @@
         {% endif %}
         {% block content%}{% endblock %}
     </main>
+    <footer>
+        <div class="footer">
+              <div class="row">
+                <div class="col-lg-5 col-xs-12 about-company">
+                  <h4>Charity</h4>
+                  <p class="pr-5 text-white-50">
+                      This Organisation helps NGO raise funds,
+                    It is a platform where donors can donate to the causes they support </p>
+                  <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="fa fa-linkedin-square"></i></a></p>
+                </div>
+                <div class="col-lg-3 col-xs-12 links">
+                  <h4 class="mt-lg-0 mt-sm-3">Links</h4>
+                    <ul class="m-0 p-0">
+                      <li>- <a href="{% url 'welcome' %}">Home</a></li>                      
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-xs-12 location">
+                  <h4 class="mt-lg-0 mt-sm-4">Location</h4>
+                  <p>22, Mwangaza lane</p>
+                  <p class="mb-0"><i class="fa fa-phone mr-3"></i>(254) 754-3010</p>
+                  <p><i class="fa fa-envelope-o mr-3"></i>info@charity_online.com</p>
+                </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col copyright">
+                  <p class=""><small>© 2020. All Rights Reserved.</small></p>
+                </div>
+              </div>
+            </div>
+    </footer>
     {% block scripts %}
         <!-- JQuery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

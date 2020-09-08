@@ -16,11 +16,11 @@ from django.views.generic.edit import FormMixin
 
 
 # Create your views here.
-def landing(request):
-    return render(request, 'landing.html')
+
 
 def welcome(request):
     donations = Donation.objects.order_by('-pub_date')
+    categories = Category.objects.all()
 
     app_donations = []
     rej_donations = []
@@ -32,6 +32,7 @@ def welcome(request):
     context = {
         'app_donations': app_donations,
         'rej_donations': rej_donations,
+        'categories': categories,
     }
     return render(request, 'welcome.html', context)
 
@@ -88,20 +89,16 @@ class DonationDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DonationDetailView, self).get_context_data(**kwargs)
         made_donations = MadeDonation.objects.filter(donation=self.object.id)
-        print(made_donations)
         remaing_amm = 0
         amm_donated = 0
         for donation in made_donations:
             amm_donated += int(donation.amount)
 
-        print(amm_donated)
         remaing_amm = (int(self.object.target) - amm_donated)
 
         context['donations'] = made_donations
         context['amt_remaining'] = remaing_amm
-        return context
-
-    
+        return context  
 
 
 
@@ -159,15 +156,24 @@ def admin_profile(request):
         else:
             rej_donations.append(donation)
     categories = Category.objects.all()
+    donors = Donor.objects.all()
+    ngos = NGO.objects.all()
     context = {
         'donations': donation_req,
         'categories': categories,
         'app_donations': app_donations,
         'rej_donations': rej_donations,
-        "form": form
+        "form": form,
+        "donors": donors,
+        "ngos": ngos
     }
     return render(request, 'admin_profile.html', context)
 
+@user_passes_test(lambda u: u.is_superuser)
+def delete_category(request, id):
+    category = Category.objects.filter(id=id)
+    category.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @ngo_required
 def request_donation(request):
@@ -193,7 +199,8 @@ def approve_request(request, id):
     print(donation)
     donation.status = True
     donation.save()
-    return render(request, 'donation_approval.html')
+    messages.success(request, f'Request approved')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @donor_required

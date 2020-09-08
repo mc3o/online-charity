@@ -5,18 +5,46 @@
     <div class="row">
         <div class="col-sm-12 mt-1">
             {% if user.is_authenticated and user.is_ngo%}
-            <a href="{% url 'request_donation' %}" class="btn btn-block" style="background: rgb(119, 119, 212); color:white;">Request Donation</a href="{% url 'request_donation'%"><br><br>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h4 style="background: rgb(74, 228, 74); padding:.5em;width:60%;margin:0 auto; border-radius:5%">
-                            Approved Donation Requests 
-                        </h4>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" style="width: 25%; font-size:1.3rem; text-align:center;" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Fill request</a>
+                  <a class="nav-item nav-link" style="width: 25%; font-size:1.3rem; text-align:center;" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Approved Requests
+                       <span class="badge badge-success"> </span>
+                  </a>
+                  <a class="nav-item nav-link" style="width: 25%; color:black; font-size:1.3rem; text-align:center;" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Pending requests
+                      <span class="badge badge-danger"><span>
+                  </a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" style="background: white;">
+                    <div class="row" style="padding: 1em;">
+                        <div class="col-sm-6">
+                            <h4>Available categories</h4>
+                            {% for category in categories %}
+                            <div class="btn btn-warning">
+                                {{category.name}}
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div class="row" style="padding: 1em;">
+                        <a href="{% url 'request_donation' %}" class="btn  btn-primary">Request Donation</a href="{% url 'request_donation'%"><br><br>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" style="background: white;">
+                    <div class="row">
                         {% for donation in app_donations %}
                             {% if user.username == donation.ngo.name %}
+                            
+                            <div class="col-sm-4">
+
                             <div class="cont">
                                 <div class="post"> 
-                                    <div class="body_post">
-                                        <div class="post_content">
+                                    <div class="body_post" style="background: rgb(211, 209, 209);">
+                                        <div class="post_content" style="background: rgb(211, 209, 209);">
                                             <h1>{{donation.name}}</h1>
                                             <p>{{donation.description}}</p>
 
@@ -40,24 +68,25 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                               
+                            </div>  
+                            </div>
                                 
                             {% endif %}
                         {% endfor %}
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 style="background: rgb(243, 96, 77); padding:.5em;width:60%;margin:0 auto; border-radius:5%">
-                           
+                    </div>                             
 
-                            Pending Donation Requests
-                        </h4>
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" style="background: white;">
+                    <div class="row">
+                        
                         {% for donation in rej_donations %}
 
                             {% if user.username == donation.ngo.name %}
+                            <div class="col-sm-4">
                                 <div class="cont">
                                     <div class="post"> 
-                                        <div class="body_post">
-                                            <div class="post_content">
+                                        <div class="body_post" style="background: rgb(211, 209, 209);">
+                                            <div class="post_content" style="background: rgb(211, 209, 209);">
                                                 <h1>{{donation.name}}</h1>
                                                 <p>{{donation.description}}</p>
 
@@ -81,19 +110,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>                                
+                                </div> 
+                            </div>                               
                             {% endif %}
                         {% endfor %}
                     </div>
                 </div>
+            </div>
+                
             
             
             
-            {% endif %}           
         </div>
         
     </div>
-    <h4 class="text-center text-success">All Approved donation Requests</h4>
+    {% elif user.is_authenticated and user.is_donor %}
+    <h4 class="text-center" style="color: #cbab41;">All Approved donation Requests</h4>
 
     <div class="row mt-2">
             {% for donation in app_donations %}
@@ -105,9 +137,9 @@
                                     <p>{{donation.description}}</p>
 
                                     <p><b style="color: indianred; font-weight:bold;">Target:- </b>{{donation.target}}</p>
+                                    <p>Remaining amount:- </p>
                                     <a href="{% url 'donation_donor_detail' donation.id %}" class="btn btn-success">Details</a>
 
-                                    <a href="{% url 'donate' donation.id %}" class="btn btn-info">Donate</a>
                                     <div class="cont_infos">
                                         
                                         <div class="postedBy">
@@ -129,4 +161,41 @@
                     </div>                    
             {% endfor %}
     </div>
+    {% else %}
+    <h4 class="text-center" style="color: #816815; ">All Approved donation Requests</h4>
+
+    <div class="row mt-2">
+            {% for donation in app_donations %}
+                    <div class="cont col-sm-4">
+                        <div class="post"> 
+                            <div class="body_post">
+                                <div class="post_content">
+                                    <h1>{{donation.name}}</h1>
+                                    <p>{{donation.description}}</p>
+
+                                    <p><b style="color: indianred; font-weight:bold;">Target:- </b>{{donation.target}}</p>
+                                    <a href="{% url 'donation_donor_detail' donation.id %}" class="btn btn-success">Details</a>
+
+                                    <div class="cont_infos">
+                                        
+                                        <div class="postedBy">
+                                            <span>Organisation</span>
+                                            {{donation.ngo.name}}
+                                        </div>
+                    
+                                        <div class="cont_tags">
+                                            <span>Category</span>
+                                            <div class="tags">
+                                                <p>{{donation.category.name}}</p>
+                                            </div>
+                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+            {% endfor %}
+    </div>
+    {% endif %}
 {% endblock %}

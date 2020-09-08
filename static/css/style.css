@@ -56,9 +56,7 @@ content .nav-pills .nav-link:hover{
 	 position: relative;
 }
 
- .cont .post:hover .body_post {
-	 height: 90%;
-} 
+
 
  .cont .post .body_post {
 	 width: 100%;
@@ -68,11 +66,7 @@ content .nav-pills .nav-link:hover{
 	 display: flex;
 	 justify-content: center;
 	 align-items: center;
-	 -webkit-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
-	 -moz-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
-	 -ms-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
-	 -o-transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
-	 transition: cubic-bezier(0.68, -0.55, 0.27, 1.55) 320ms;
+	
 }
  .cont .post .body_post .post_content {
 	 width: 80%;
@@ -179,7 +173,6 @@ font-family: 'Shanti', sans-serif;
 #login{
   padding: 2%;
   font-family: 'Shanti', sans-serif;
-  margin-top: 2%;
   margin-bottom: 2%;
   background-color: rgb(144, 148, 146);
   color: #ffffff;
@@ -270,29 +263,49 @@ margin-top: 2%;
 margin-bottom: 2%;
 color: white;
 }
-
-#approved{
-background-color: #A6DDB9;
-margin: 3%;
-padding-top: 3%;
-}
-
-#welcome4{
-background-color: #c0cac4;
-
-}
-
-#admin{
-font-family: 'Shanti', sans-serif;
-}
-
-#admin1{
-margin: 1%;
-}
-
 #donation{
 background-color: #A6DDB9;
 font-family: 'Shanti', sans-serif;
 padding: 2%;
 margin: 2%;
+}
+
+.footer {
+	background:rgb(7, 56, 51);
+	color: white;
+	font-family: 'Shanti', sans-serif;
+	padding: 1em;
+}
+.footer h4{
+	color: #cbab41;
+}
+.footer .links ul {
+	list-style-type: none;
+}
+.footer .links li a {
+	color: white;
+	transition: color 0.2s;
+}
+.footer .links li a:hover {
+	text-decoration: none;
+	color: #cbab41;
+}
+.footer .about-company i {
+	font-size: 1.3rem;
+}
+.footer .about-company a {
+	color: white;
+	transition: color 0.2s;
+}
+.footer .about-company a:hover {
+	color: #4180cb;
+}
+.footer .location i {
+	font-size: 18px;
+}
+.footer .copyright p {
+	border-top: 1px solid rgba(255, 255, 255, .1);
+	text-align: center;
+	color: #cbab41;
+	font-size: 1rem;
 }
