@@ -23,7 +23,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ngo.urls')),
-    # path('', user_views.index, name='welcome'),
     path('register/', user_views.signup, name='register'),
     path('acc/ngo/register', user_views.NgoSignUpView.as_view(), name='reg-ngo'),
     path('acc/donor/register', user_views.DonorSignUpView.as_view(), name='reg-donor'),

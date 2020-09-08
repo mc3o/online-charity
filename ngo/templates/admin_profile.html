@@ -45,6 +45,11 @@
                         <a class="nav-link" href="{% url 'welcome' %}">Site <span class="sr-only">(current)</span></a>
                     </li>           
                 </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout </a>
+                    </li>           
+                </ul>
             </div>
         </nav>
         
@@ -68,8 +73,14 @@
                 <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Donation Requests 
                     &nbsp; &nbsp;&nbsp;<span class="badge badge-danger">{{rej_donations | length}} requests</span>
                 </a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-donor-list" data-toggle="list" href="#list-donor" role="tab" aria-controls="donor">Donors
+                    &nbsp; &nbsp;&nbsp;<span class="badge badge-light">{{donors | length}} donors</span> 
+
+                </a>
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="list-ngo-list" data-toggle="list" href="#list-ngo" role="tab" aria-controls="ngo">NGO's
+                    &nbsp; &nbsp;&nbsp;<span class="badge badge-light">{{ngos | length}} ngos</span> 
+
+                </a>
               </div>
             </div>
             <div class="col-9">
@@ -83,12 +94,38 @@
                             
                             <p>
                                 {% for category in categories %}
-                                <div class="btn btn-outline-success btn-sm">
+                                <div class="">
                                     {{category.name}}
+                                    <span class="btn btn-danger btn-sm" data-target="#deleCatModal{{category.id}}" data-toggle="modal">X</span>
                                 </div>
                                     
-                                {% endfor %}
+                                
                             </p>
+                            <!-- delete Cat Modal -->
+                            <div class="modal fade" id="deleCatModal{{category.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Category</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete 
+                                            <span style="font-weight: bold;">{{category.name}}</span>
+                                        </p>                                       
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'delete_cat' category.id %}" class="btn btn-outline-danger" >Yes</a>
+                                        <button type="button" class="btn btn-outline- secondary" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- modal -->
+                            {% endfor %}
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -105,7 +142,7 @@
                                             
                                             {{ form|crispy}}
                                             <input type="hidden" name="next" value="{{ request.path }}">
-                                            <button class="btn btn-secondary" type="submit">Submit Request</button>
+                                            <button class="btn btn-secondary" type="submit">Add</button>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
@@ -132,6 +169,7 @@
                                     <th scope="col">NGO</th>
                                     <th scope="col">Target</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -145,6 +183,9 @@
                                             <td>
                                                 <a href="{% url 'approve_request' donation.id %}" class="btn ntn-md btn-outline-danger">Not Approved</a>
                                                 
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'delete_request' %}">Delete Request</a>
                                             </td>
                                         </tr>
                                   {% endfor %}                  
@@ -180,13 +221,68 @@
                                         </tr>
                                   {% endfor %}                  
                                 </tbody>
-                              </table>
+                            </table>
                         </div>
                     </div>
                         
-                    </div>
                 </div>
-        
+                <div class="tab-pane fade" id="list-donor" role="tabpanel" aria-labelledby="list-donor-list">
+                   <div class="row">
+                    <h5 class="text-center">All donors</h5>
+                    <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                        <thead class="black white-text text-monospace text-uppercase">
+                          <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for donor in donors %}
+                                <tr>
+                                    <th scope="row">{{donor.user_id}}</th>
+                                    <td>{{donor.name}}</td>
+                                    <td>{{donor.email}}</td>
+                                </tr>
+                          {% endfor %}                  
+                        </tbody>
+                    </table>
+                   </div>
+                        
+                        
+                </div>
+                <div class="tab-pane fade" id="list-ngo" role="tabpanel" aria-labelledby="list-ngo-list">
+                    <div class="row">
+                        <h5 class="text-center">All ngos</h5>
+                        <table class="table table-bordered" style="background: rgb(221, 220, 220);">
+                            <thead class="black white-text text-monospace text-uppercase">
+                              <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Location</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for ngo in ngos %}
+                                    <tr>
+                                        <th scope="row">{{ngo.user_id}}</th>
+                                        <td>{{ngo.name}}</td>
+                                        <td>{{ngo.email}}</td>
+                                        <td>{{ngo.location}}</td>
+                                        
+                                    </tr>
+                              {% endfor %}                  
+                            </tbody>
+                        </table>
+                    </div>
+                         
+                         
+                 </div>
+            </div>
+        {% endif %}
         {% endblock %} 
    </main>
     {% block scripts %}
