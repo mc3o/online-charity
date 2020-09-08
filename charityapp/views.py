@@ -165,3 +165,9 @@ def search_donations(request):
     else:
         message = "You haven't searched for any donations"
     return render(request, 'users/results.html', {'message': message})
+
+# @login_required
+# def search_ngo(request):
+#     if 'search_ngo' in request.GET:
+#         name = request.get('search_ngo')
+#         cat_id = Category.objects.filter(name=name).first()

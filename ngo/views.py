@@ -16,6 +16,8 @@ from django.views.generic.edit import FormMixin
 
 
 # Create your views here.
+def landing(request):
+    return render(request, 'landing.html')
 
 def welcome(request):
     donations = Donation.objects.order_by('-pub_date')

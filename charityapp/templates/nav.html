@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block nav%}
+<nav class="navbar navbar-expand-lg navbar-dark" id="kj" style="background:#0D5D56;">
+    <a class="navbar-brand" href="{% url 'welcome' %}">Charity</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">            
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'welcome' %}">Home <span class="sr-only">(current)</span></a>
+            </li>             
+        
+        
+        </ul>
+        
+
+        <ul class="navbar-nav ml-auto">
+            <form class="mb-0 h1 ml-auto mr-auto" id="searchform" action="{% url 'search' %}" >
+                <input name="search_donations" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder="Search category">
+               <i class="spinner "></i>
+           </form>
+            
+            {% if user.is_authenticated and user.is_donor %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'donor_profile' %}">Donor Profile<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% elif user.is_authenticated and user.is_ngo %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'ngo_profile' %}">NGO Profile<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% elif user.is_authenticated and user.is_superuser %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'admin_profile' %}">Admin's Profile<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% else%}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+{%endblock%}
