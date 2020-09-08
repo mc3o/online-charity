@@ -4,7 +4,28 @@
 - Joan Evans
 - Stephen Ngugi
 - Mathew M
-
+##User stories
+#### A Donor can:
+ ```bash 
+ view all approved donation requests
+ view details about the donation request such as the target amount and amount donated so far
+ donate to the approved donation requests
+ see a history of donations they've made
+``` 
+#### An NGO can:
+ ```bash 
+ create a donation request
+ see donation requests that have been approved by the admin and those still pending approval
+ delete donation requests
+ see those who have donated to their request
+ see the amount remaining to complete the target of the donation request
+``` 
+##### An Admin can:
+ ```bash 
+ see all the donation requests approved and those pending approval
+ approve donation requests
+ create donation categories for donaions requests
+``` 
 ## Setup and Installation  
 To get the project .......  
 #### Cloning the repository:  
