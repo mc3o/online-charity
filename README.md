@@ -1,10 +1,13 @@
-# online-charity
-
+# Online-charity
+# Description
+```bash 
+Online Charity, a web application where donors can easily find and donate to NGOs and the NGOs can request for donations.
+```
 # Authors
 - Joan Evans
 - Stephen Ngugi
 - Mathew M
-##User stories
+## User stories
 #### A Donor can:
  ```bash 
  view all approved donation requests
