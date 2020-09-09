@@ -169,7 +169,6 @@
                                     <th scope="col">NGO</th>
                                     <th scope="col">Target</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -184,9 +183,7 @@
                                                 <a href="{% url 'approve_request' donation.id %}" class="btn ntn-md btn-outline-danger">Not Approved</a>
                                                 
                                             </td>
-                                            <td>
-                                                <a href="{% url 'delete_request' %}">Delete Request</a>
-                                            </td>
+                                            
                                         </tr>
                                   {% endfor %}                  
                                 </tbody>

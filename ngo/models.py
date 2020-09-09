@@ -5,8 +5,7 @@ from charityapp.models import NGO, User, Donor
 from django.urls import reverse
 
 
-# from pyuploadcare.dj.models import ImageField
-# from tinymce.models import HTMLField
+
 
 
 # Create your models here.
